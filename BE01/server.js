@@ -5,8 +5,7 @@ const port = 3000
 
 app.get("/", (req, res) => {
     res.status(200).json({
-        message: "Hello from Josh Santeno",
-        description: "First endpoint from week 1 assignment"
+        status: "ok"
     })
 })
 
