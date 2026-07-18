@@ -1,9 +1,14 @@
-import express from "express";
+import express, { json } from "express"
+import swaggerJsdoc from "swagger-jsdoc"
+import swaggerUi from "swagger-ui-express"
+import { readFile } from 'node:fs/promises';
 
 const app = express()
 const port = 3000
+const swaggerDocument = await readFile('./openapi.json', {encoding: 'utf8'})
 
 app.use(express.json())
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(JSON.parse(swaggerDocument)))
 
 const tasks = [
     {id: 1, title: "Note1", done:true},
