@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="Swagger UI preview">
+  <rect width="1200" height="700" fill="#f8fafc"/>
+  <rect x="40" y="40" width="1120" height="620" rx="16" fill="#ffffff" stroke="#d9e2ec" stroke-width="2"/>
+  <rect x="60" y="70" width="220" height="40" rx="8" fill="#7c3aed"/>
+  <text x="80" y="98" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="600">Swagger UI</text>
+  <rect x="60" y="130" width="300" height="36" rx="8" fill="#eef2ff"/>
+  <text x="80" y="154" fill="#4338ca" font-family="Segoe UI, Arial, sans-serif" font-size="18">/tasks</text>
+  <rect x="60" y="190" width="320" height="160" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="80" y="224" fill="#111827" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">GET /tasks</text>
+  <text x="80" y="256" fill="#475569" font-family="Segoe UI, Arial, sans-serif" font-size="16">List all available tasks</text>
+  <rect x="80" y="280" width="120" height="32" rx="8" fill="#10b981"/>
+  <text x="108" y="301" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600">Try it out</text>
+  <rect x="420" y="130" width="700" height="480" rx="12" fill="#0f172a"/>
+  <rect x="440" y="160" width="660" height="36" rx="8" fill="#1e293b"/>
+  <text x="460" y="184" fill="#e2e8f0" font-family="Segoe UI, Arial, sans-serif" font-size="16">GET /tasks</text>
+  <rect x="440" y="220" width="260" height="22" rx="6" fill="#334155"/>
+  <rect x="440" y="256" width="320" height="18" rx="6" fill="#475569"/>
+  <rect x="440" y="286" width="220" height="18" rx="6" fill="#475569"/>
+  <rect x="440" y="330" width="240" height="34" rx="8" fill="#10b981"/>
+  <text x="475" y="352" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600">Execute</text>
+  <rect x="440" y="390" width="640" height="190" rx="10" fill="#111827" stroke="#334155"/>
+  <text x="460" y="428" fill="#86efac" font-family="Consolas, monospace" font-size="16">HTTP/1.1 200 OK</text>
+  <text x="460" y="458" fill="#cbd5e1" font-family="Consolas, monospace" font-size="15">[{&quot;id&quot;:1,&quot;title&quot;:&quot;Note1&quot;,&quot;done&quot;:true}]</text>
+</svg>
