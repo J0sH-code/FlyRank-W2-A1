@@ -10,11 +10,6 @@ const swaggerDocument = await readFile('./openapi.json', {encoding: 'utf8'})
 app.use(express.json())
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(JSON.parse(swaggerDocument)))
 
-const tasks = [
-    {id: 1, title: "Note1", done:true},
-    {id: 2, title: "Note2", done:true},
-    {id: 3, title: "Note3", done:true}
-]
 
 app.get("/", (req, res) => {
     res.status(200).json({
@@ -25,23 +20,15 @@ app.get("/", (req, res) => {
 })
 
 app.get("/health", (req, res) => {
-    res.status(200).json({
-        status: "ok"
-    })
+    
 })
 
 app.get("/tasks", (req, res) => {
-    res.status(200).send(tasks)
+    
 })
 
 app.get("/tasks/:id", (req, res) => {
-    const requestedTask = tasks.find(task => task.id == req.params.id)
-    if (requestedTask == null) {
-        res.status(404).json({
-            error: `Task ${req.params.id} not found`
-        })
-    }
-    res.status(200).send(requestedTask)
+    
 })
 
 app.post("/tasks", (req, res) => {
