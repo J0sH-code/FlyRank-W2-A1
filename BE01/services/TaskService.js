@@ -9,6 +9,10 @@ export default class TaskService {
     }
 
     getTask(id){
+        if (id == null) {
+            throw new ValidationError('Invalid/missing id')
+        }
+
         const requestedTask = this.#taskRepo.findById(id)
         if (requestedTask == null) {
             throw new NotFoundError(`Task ${id} not found`);
@@ -18,21 +22,16 @@ export default class TaskService {
     }
 
     createTask(title){
-        if (taskTitle == null) {
+        if (title == null) {
             throw new ValidationError("Title Missing");
         }
 
-        let repoSize = this.getTasks().length
-        let newId = this.getTasks()[repoSize-1].id + 1
-
         let newTask = {
-            id: newId,
             title: title,
             done: false
         }
-        this.#taskRepo.add(newTask)
 
-        return this.getTask(newTask.id)
+        return this.#taskRepo.add(newTask)
     }
 
     updateTask(id, payload){
@@ -45,17 +44,23 @@ export default class TaskService {
             throw new NotFoundError(`Task ${id} not found`);
             
         }
-
+        
         this.#taskRepo.updateTitle(id, payload.title)
-        this.#taskRepo.updateStatus(id, payload.status)
+        this.#taskRepo.updateStatus(id, payload.done)
+
+        return this.getTask(id)
     }
 
     deleteTask(id){
+        if (id == null) {
+            throw new ValidationError('Invalid/missing id')
+        }
+
         let requestedTask = this.getTask(id)
         if (requestedTask == null) {
             throw new NotFoundError(`Task ${id} not found`);
         }
 
-        this.#taskRepo.deleteTask(requestedTask)
+        this.#taskRepo.deleteTask(id)
     }
 }

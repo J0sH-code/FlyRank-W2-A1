@@ -1,16 +1,44 @@
 # FlyRank BE01 Task API
 
-This project is a simple Express-based task API with an in-memory task store. It exposes a small set of CRUD-style routes for managing tasks and includes Swagger documentation for browsing the endpoints.
+This project is an Express-based task API backed by PostgreSQL. It exposes CRUD-style routes for managing tasks and includes Swagger documentation for exploring the API.
+
+## Tech stack
+
+- Node.js + Express
+- PostgreSQL via the `pg` client
+- Swagger UI for API docs
+- Environment-based configuration using `.env`
+
+## Prerequisites
+
+Before running the app, make sure PostgreSQL is installed and running locally or on your configured host.
+
+Create a `.env` file in the `BE01` folder with the following variables:
+
+```env
+HOST=localhost
+USER=postgres
+DB_PORT=5432
+PASSWORD=your_postgres_password
+DATABASE=flyrank
+```
+
+Update the values to match your PostgreSQL instance.
 
 ## Install and run
 
-Run the following command from the project folder:
+From the `BE01` directory, run:
 
 ```bash
-npm install && node server.js
+npm install
+npm start
 ```
 
 The API will start on port 3000.
+
+## Database connection
+
+The app creates a PostgreSQL connection pool in `BE01/config/db.js` using the values from the `.env` file. The connection is initialized with `new Pool(...)` from the `pg` package.
 
 ## Swagger UI
 
@@ -53,6 +81,7 @@ Content-Length: 15
 
 ## Notes
 
-- The API uses an in-memory array, so data is reset when the server restarts.
+- Data is stored in PostgreSQL rather than an in-memory array.
+- Database configuration is managed through environment variables in the `.env` file.
 - The OpenAPI definition is stored in [BE01/openapi.json](BE01/openapi.json).
 

@@ -4,40 +4,40 @@ import TaskService from "../services/TaskService.js";
 const taskRouter = express.Router()
 const taskService = new TaskService()
 
-taskRouter.get("/tasks", (req, res) => {
-    res.status(200).json(taskService.getTasks())
+taskRouter.get("/tasks", async (req, res) => {
+    res.status(200).json(await taskService.getTasks())
 })
 
-taskRouter.get("/tasks/:id", (req, res, next) => {
+taskRouter.get("/tasks/:id", async (req, res, next) => {
     try {
-        res.status(200).send(taskService.getTask(req.params.id))
+        res.status(200).json(await taskService.getTask(req.params.id))
     } catch (error) {
         next(error)
     }
 })
 
-taskRouter.post("/tasks", (req, res, next) => {
+taskRouter.post("/tasks", async (req, res, next) => {
     try {
         res.status(201).json({
             created: true,
-            task: taskService.createTask(req.body.title)
+            task: await taskService.createTask(req.body.title)
         })
     } catch (error) {
          next(error)
     }
 })
 
-taskRouter.put("/tasks/:id", (req, res, next) => {
+taskRouter.put("/tasks/:id", async (req, res, next) => {
     try {
-        res.status(201).send(taskService.updateTask(req.params.id, req.body))
+        res.status(201).json(await taskService.updateTask(req.params.id, req.body))
     } catch (error) {
         next(error)
     }
 })
 
-taskRouter.delete("/tasks/:id", (req, res, next) => {
+taskRouter.delete("/tasks/:id", async (req, res, next) => {
     try {
-        taskService.deleteTask(req.params.id)
+        taskService.deleteTask(await req.params.id)
         res.sendStatus(204)
     } catch (error) {
          next(error)

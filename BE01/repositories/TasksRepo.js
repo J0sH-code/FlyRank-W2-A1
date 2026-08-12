@@ -1,6 +1,6 @@
+import dbClient from "../config/db.js"
 export default class TaskRepo {
     constructor(){
-
     }
 
     #tasks = [
@@ -9,27 +9,91 @@ export default class TaskRepo {
         {id: 3, title: "Note3", done:true}
     ]
 
-    getAllTasks(){
-        return this.#tasks
+    async getAllTasks(){
+        try {
+            const { rows } = await dbClient.query(`SELECT * FROM tasks;`);
+            console.log('All tasks: ', rows);
+            return rows;
+        } catch (error) {
+            console.error('Database query error:', error);
+        }
     }
 
-    findById(id){
-        return this.#tasks.find(tasks => tasks.id === id)
+    async findById(id){
+        const findTaskByIdQuery = `SELECT * FROM tasks WHERE id = $1;`
+        const values = [id]
+
+        try {
+            const { rows } = await dbClient.query(findTaskByIdQuery, values)
+            console.log(rows);
+            
+            return rows[0]  
+        } catch (error) {
+            console.error('Error fetching task:', error);
+        }
     }
 
-    add(task){
-        this.#tasks.push(task)
+    async add(task){
+        const newTaskQuery = `
+                INSERT INTO tasks (title, done)
+                VALUES ($1, $2)
+                RETURNING *;
+            `
+        const values = [task.title, task.done] 
+        try {
+            const { rows } = await dbClient.query(newTaskQuery, values)
+            return rows[0]
+        } catch (error) {
+            console.error('Error inserting task:', error);
+        }
     }
 
-    updateTitle(id, newTitle){
-        this.findById(id).title = newTitle
+    async updateTitle(id, newTitle){
+        const updateTitleQuery = `
+            UPDATE tasks
+            SET 
+                title = $1
+            WHERE id = $2
+            RETURNING *;
+        `
+        const values = [newTitle, id]
+        try {
+            const { rows } = await dbClient.query(updateTitleQuery, values)
+            return rows
+        } catch (error) {
+            console.error('Error updating title:', error);
+        }
     }
 
-    updateStatus(id, newStatus){
-        this.findById(id).done = newStatus
+    async updateStatus(id, newStatus){
+        const updateStatusQuery = `
+            UPDATE tasks
+            SET 
+                done = $1
+            WHERE id = $2
+            RETURNING *;
+        `
+        const values = [newStatus, id]
+        console.log(newStatus);
+        
+        try {
+            const { rows } = await dbClient.query(updateStatusQuery, values)
+            console.log(rows[0]);
+            
+            return rows
+        } catch (error) {
+            console.error('Error updating status:', error);
+        }
     }
 
-    deleteTask(task){
-        this.#tasks.splice(this.tasks.indexOf(task),1)
+    async deleteTask(id){
+        try {
+            await dbClient.query(`
+                    DELETE FROM tasks
+                    WHERE id = $1;
+                `, [id])
+        } catch (error) {
+            console.error('Error in deleting task:', error);
+        }
     }
 }

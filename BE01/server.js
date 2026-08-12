@@ -6,7 +6,7 @@ import TaskService from "./services/TaskService.js";
 import taskRouter from "./routes/TaskRoute.js";
 import metaRouter from "./routes/MetaRoute.js";
 import errorHandler from "./middleware/error-handler.js";
-
+import initializeTable from "./repositories/InitialTableRepo.js";
 const app = express()
 const port = 3000
 const swaggerDocument = await readFile('./openapi.json', {encoding: 'utf8'})
@@ -20,5 +20,6 @@ app.use("/", metaRouter)
 app.use(errorHandler)
 
 app.listen(port,() => {
+    initializeTable();
     console.log(`Listening to ${port}`)
 })
