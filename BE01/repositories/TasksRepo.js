@@ -3,12 +3,6 @@ export default class TaskRepo {
     constructor(){
     }
 
-    #tasks = [
-        {id: 1, title: "Note1", done:true},
-        {id: 2, title: "Note2", done:true},
-        {id: 3, title: "Note3", done:true}
-    ]
-
     async getAllTasks(){
         try {
             const { rows } = await dbClient.query(`SELECT * FROM tasks;`);

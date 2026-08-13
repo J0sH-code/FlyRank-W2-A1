@@ -25,6 +25,29 @@ DATABASE=flyrank
 
 Update the values to match your PostgreSQL instance.
 
+## Running PostgreSQL with Docker
+
+To quickly set up PostgreSQL using Docker, run:
+
+```bash
+docker run --name taskdb -e POSTGRES_PASSWORD=dev -e POSTGRES_DB=task -p 5432:5432 -d postgres
+```
+
+This creates a PostgreSQL container with:
+- Container name: `taskdb`
+- Password: `dev`
+- Database: `task`
+
+Then update your `.env` file accordingly:
+
+```env
+HOST=localhost
+USER=postgres
+DB_PORT=5432
+PASSWORD=dev
+DATABASE=task
+```
+
 ## Install and run
 
 From the `BE01` directory, run:
