@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      HOST: "db"
+      USER: "${USER}"
+      DB_PORT: 5432
+      PASSWORD: "${PASSWORD}"
+      DATABASE: "${DATABASE}"
+    depends_on: [db]
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: "${USER}" 
+      POSTGRES_PASSWORD: "${PASSWORD}"
+      POSTGRES_DB: "${DATABASE}"
+    ports: 
+      - "5433:5432"
+    volumes: [taskdb_data:/var/lib/postgresql]
+volumes:
+  taskdb_data:
