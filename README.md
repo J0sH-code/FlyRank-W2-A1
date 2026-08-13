@@ -48,7 +48,7 @@ PASSWORD=dev
 DATABASE=task
 ```
 
-## Install and run
+## Install and run (Local)
 
 From the `BE01` directory, run:
 
@@ -58,6 +58,34 @@ npm start
 ```
 
 The API will start on port 3000.
+
+## Run with Docker Compose (Recommended)
+
+The easiest way to run both the API and PostgreSQL database is using Docker Compose. From the `BE01` directory, run:
+
+```bash
+docker compose up
+```
+
+This will:
+- Build and start the Node.js API on port 3000
+- Start PostgreSQL on port 5433
+- Automatically set up the database connection
+- Create a persistent volume for database data
+
+To run in the background, use:
+
+```bash
+docker compose up -d
+```
+
+To stop the containers:
+
+```bash
+docker compose down
+```
+
+**Note:** The `.env` file is required for Docker Compose. Use `.env.example` as a template if you don't have one.
 
 ## Database connection
 
