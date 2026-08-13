@@ -30,7 +30,7 @@ Update the values to match your PostgreSQL instance.
 To quickly set up PostgreSQL using Docker, run:
 
 ```bash
-docker run --name taskdb -e POSTGRES_PASSWORD=dev -e POSTGRES_DB=task -p 5432:5432 -d postgres
+docker run --name taskdb -e POSTGRES_PASSWORD=dev -e POSTGRES_DB=task -p 5433:5432 -d postgres
 ```
 
 This creates a PostgreSQL container with:
