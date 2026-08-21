@@ -1,14 +1,14 @@
 import express, { json } from "express"
-import swaggerJsdoc from "swagger-jsdoc"
 import swaggerUi from "swagger-ui-express"
 import { readFile } from 'node:fs/promises';
-import TaskService from "./services/TaskService.js";
 import taskRouter from "./routes/TaskRoute.js";
 import metaRouter from "./routes/MetaRoute.js";
 import errorHandler from "./middleware/error-handler.js";
 import initializeTable from "./repositories/InitialTableRepo.js";
+import 'dotenv/config'
+
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const swaggerDocument = await readFile('./openapi.json', {encoding: 'utf8'})
 
 app.use(express.json())
